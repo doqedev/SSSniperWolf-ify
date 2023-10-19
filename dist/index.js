@@ -37,11 +37,19 @@ var ImageType;
     ImageType[ImageType["Suprised2"] = 4] = "Suprised2";
     ImageType[ImageType["Neutral2"] = 5] = "Neutral2";
     ImageType[ImageType["Suprised3"] = 6] = "Suprised3";
+    ImageType[ImageType["ReallyConcerned1"] = 7] = "ReallyConcerned1";
+    ImageType[ImageType["Devious"] = 8] = "Devious";
+    ImageType[ImageType["ReallyConcerned2"] = 9] = "ReallyConcerned2";
+    ImageType[ImageType["Crying"] = 10] = "Crying";
+    ImageType[ImageType["Mugshot"] = 420] = "Mugshot";
 })(ImageType || (exports.ImageType = ImageType = {}));
 async function sniperwolfify(backgroundImagePath, ImageType) {
     try {
-        const randomImageNumber = ImageType || Math.floor(Math.random() * 6) + 1;
-        const overlayImagePath = path.join(__dirname, "../images", `${randomImageNumber}.png`);
+        const randomImageNumber = ImageType || Math.floor(Math.random() * 10) + 1;
+        let imageFile = `${randomImageNumber}.png`;
+        if (randomImageNumber === 420)
+            imageFile = `mugshot.png`;
+        const overlayImagePath = path.join(__dirname, "../images", imageFile);
         const backgroundImage = await jimp_1.default.read(backgroundImagePath);
         const overlayImage = await jimp_1.default.read(overlayImagePath);
         backgroundImage.resize(976, 720);
